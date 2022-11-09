@@ -50,6 +50,7 @@ def plot_cdf(log):
     fig, _ = plt.subplots()
     xs, ys = cdf(log)
     plt.plot(xs, ys)
+    plt.ylim((0, 1))
     plt.xlabel('k')
     plt.ylabel('P(g(U) <= k')
     plt.title('CDF')
