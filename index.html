@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Probabilty Tester</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- pyscript -->
+        <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+        <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+        <py-env>
+            - matplotlib
+            - numpy
+            - paths:
+                - ./utils.py
+        </py-env>
+        <style>
+            textarea {
+                width: 500px;
+                height: 200px;
+                margin-top: 0px;
+                text-align: top;
+            }
+            button {
+                margin-top: 5px;
+                width: 100px;
+                height: 30px;
+                border-radius: 10px;
+            }
+            
+            h3 {
+                margin-bottom: 1px;
+            }
+
+            .container {
+                display: flex;
+                flex-direction: row;
+                margin-top: 20px;
+            }
+
+            .plot {
+                margin-left: 10px;
+            }
+        </style>
+    </head>
+    <body>
+
+        <h1>Generate Random Variable from Unif(0, 1)</h1>
+        <div>
+            <h3>g(U) =</h3>
+            <textarea type="text" id="gu-input">
+if U < 1/3:
+    return 3 * U + 1
+elif U < 2/3:
+        return 2
+else:
+    return 3 * U    	
+            </textarea>
+        </div>
+        <p>Change the above with whatever function. It should always have "return."</p>
+        <div>
+            <span>Trials: </span>
+            <input id="trials" type="number" value="90000"/>
+        </div>
+        <button id="run-button" type="submit">Generate</button>
+        
+        <div class="container">
+            <div class="plot" id="cdf"></div>
+            <div class="plot" id="dist"></div>
+        </div>
+        
+        <py-script src="./main.py"></py-script>
+        <script>
+            document.querySelector('textarea').onkeydown = function(e) {
+                if (e.key == 'Tab') {
+                    e.preventDefault();
+                    var start = this.selectionStart;
+                    var end = this.selectionEnd;
+
+                    // set textarea value to: text before caret + tab + text after caret
+                    this.value = this.value.substring(0, start) +
+                    "\t" + this.value.substring(end);
+
+                    // put caret at right position again
+                    this.selectionStart =
+                    this.selectionEnd = start + 1;
+                }
+            };
+        </script>
+    </body>
+</html>
