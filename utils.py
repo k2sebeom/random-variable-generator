@@ -34,7 +34,7 @@ def run(func_def, trials):
     for _ in range(trials):
         add(g(random()))
     
-    return log
+    return log, g
 
 
 def plot_density(log):
@@ -54,4 +54,13 @@ def plot_cdf(log):
     plt.xlabel('k')
     plt.ylabel('P(g(U) <= k')
     plt.title('CDF')
+    return fig
+
+def plot(g):
+    fig, _ = plt.subplots()
+    xs = np.linspace(0, 1, 100)
+    plt.plot(xs, [g(x) for x in xs])
+    plt.xlabel('U')
+    plt.ylabel('g(U)')
+    plt.title('g(U)')
     return fig
